@@ -7,7 +7,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7'
+        classpath 'com.android.tools.build:gradle:8.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -26,8 +26,8 @@ allprojects {
 }
 
 ext {
-    buildToolVersion = '34.0.0'
-    sdkVersion = 34
+    buildToolVersion = '33.0.0'
+    sdkVersion = 33
     minSdkVersion = 23
     constraintLayoutVersion = '2.0.4'
     koin_android_version = '3.5.3'
