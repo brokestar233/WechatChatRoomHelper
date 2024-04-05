@@ -1156,7 +1156,7 @@ public class BGASwipeBackLayout extends ViewGroup {
             }
             lp.dimPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER));
             if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_HARDWARE) {
-                ViewCompat.setLayerType(v, View.LAYER_TYPE_HARDWARE, lp.dimPaint);
+                View.setLayerType(v, View.LAYER_TYPE_HARDWARE, lp.dimPaint);
             }
             invalidateChildRegion(v);
         } else if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_NONE) {
@@ -1847,7 +1847,7 @@ public class BGASwipeBackLayout extends ViewGroup {
         @Override
         public void run() {
             if (mChildView.getParent() == this) {
-                ViewCompat.setLayerType(mChildView, ViewCompat.LAYER_TYPE_NONE, null);
+                ViewCompat.setLayerType(mChildView, View.LAYER_TYPE_NONE, null);
                 invalidateChildRegion(mChildView);
             }
             mPostedRunnables.remove(this);
