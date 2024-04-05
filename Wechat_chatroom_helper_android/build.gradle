@@ -26,8 +26,8 @@ allprojects {
 }
 
 ext {
-    buildToolVersion = '33.0.0'
-    sdkVersion = 33
+    buildToolVersion = '34.0.0'
+    sdkVersion = 34
     minSdkVersion = 23
     constraintLayoutVersion = '2.0.4'
     koin_android_version = '3.5.3'
