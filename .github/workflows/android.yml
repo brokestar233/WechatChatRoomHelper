@@ -19,11 +19,8 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
-    - name: cd to workspace
-      run: cd Wechat_chatroom_helper_android/Wechat_chatroom_helper_android
-    - name: ls
-      run: ls
-    - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: cd to workspace and build
+      run: cd Wechat_chatroom_helper_android
+           ls
+           chmod +x ./gradlew
+           ./gradlew build
