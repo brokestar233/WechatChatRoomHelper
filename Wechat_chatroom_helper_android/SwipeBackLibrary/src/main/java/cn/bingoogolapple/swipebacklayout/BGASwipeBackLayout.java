@@ -1155,11 +1155,11 @@ public class BGASwipeBackLayout extends ViewGroup {
                 lp.dimPaint = new Paint();
             }
             lp.dimPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER));
-            if (ViewCompat.getLayerType(v) != ViewCompat.LAYER_TYPE_HARDWARE) {
-                ViewCompat.setLayerType(v, ViewCompat.LAYER_TYPE_HARDWARE, lp.dimPaint);
+            if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_HARDWARE) {
+                ViewCompat.setLayerType(v, View.LAYER_TYPE_HARDWARE, lp.dimPaint);
             }
             invalidateChildRegion(v);
-        } else if (ViewCompat.getLayerType(v) != ViewCompat.LAYER_TYPE_NONE) {
+        } else if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_NONE) {
             if (lp.dimPaint != null) {
                 lp.dimPaint.setColorFilter(null);
             }
