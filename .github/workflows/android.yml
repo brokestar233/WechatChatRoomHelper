@@ -28,11 +28,10 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        tag_name: ${{ github.ref }}
-        name: Release ${{ github.ref }}
-        body: TODO New Release.
+        tag_name: pre_release
+        name: pre_release
+        body: pre_release
         draft: false
         prerelease: true
         files: |
           ${{ secrets.ReleaseZipName }}.zip
-          LICENSE 
