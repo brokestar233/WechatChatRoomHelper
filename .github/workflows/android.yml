@@ -23,13 +23,14 @@ jobs:
     - name: cd to workspace and build
       run: cd Wechat_chatroom_helper_android && ls && chmod +x ./gradlew && ./gradlew assembleRelease
     - name: create zip
-      run: zip -r ${{ secrets.ReleaseZipName }} ./*
+      run: zip -r out ./*
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: prerelease
         name: Release ${{ github.ref }}
         body: TODO New Release.
         draft: false
         prerelease: true
         files: |
-          ${{ secrets.ReleaseZipName }}.zip
+          out.zip
