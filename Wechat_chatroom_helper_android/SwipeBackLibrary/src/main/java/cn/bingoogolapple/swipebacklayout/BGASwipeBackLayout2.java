@@ -49,7 +49,7 @@ import androidx.core.os.ParcelableCompat;
 import androidx.core.os.ParcelableCompatCreatorCallbacks;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.MotionEventCompat;
-import androidx.core.view.ViewCompat;
+import androidx.core.view.View;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.customview.view.AbsSavedState;
 import androidx.customview.widget.ViewDragHelper;
@@ -396,8 +396,8 @@ public class BGASwipeBackLayout2 extends ViewGroup {
 
         setWillNotDraw(false);
 
-        ViewCompat.setAccessibilityDelegate(this, new AccessibilityDelegate());
-        ViewCompat.setImportantForAccessibility(this, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_YES);
+        View.setAccessibilityDelegate(this, new AccessibilityDelegate());
+        View.setImportantForAccessibility(this, View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         mDragHelper = ViewDragHelper.create(this, 0.5f, new DragHelperCallback());
         mDragHelper.setMinVelocity(MIN_FLING_VELOCITY * density);
@@ -1142,7 +1142,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
         }
 
         // ======================== 新加的 START ========================
-        ViewCompat.setTranslationX(mShadowView, -mShadowView.getMeasuredWidth() + newLeft);
+        View.setTranslationX(mShadowView, -mShadowView.getMeasuredWidth() + newLeft);
         // ======================== 新加的 END ========================
 
         dispatchOnPanelSlide(mSlideableView);
@@ -1159,17 +1159,17 @@ public class BGASwipeBackLayout2 extends ViewGroup {
                 lp.dimPaint = new Paint();
             }
             lp.dimPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_OVER));
-            if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_HARDWARE) {
-                ViewCompat.setLayerType(v, View.LAYER_TYPE_HARDWARE, lp.dimPaint);
+            if (View.getLayerType(v) != View.LAYER_TYPE_HARDWARE) {
+                View.setLayerType(v, View.LAYER_TYPE_HARDWARE, lp.dimPaint);
             }
             invalidateChildRegion(v);
-        } else if (ViewCompat.getLayerType(v) != View.LAYER_TYPE_NONE) {
+        } else if (View.getLayerType(v) != View.LAYER_TYPE_NONE) {
             if (lp.dimPaint != null) {
                 lp.dimPaint.setColorFilter(null);
             }
             final DisableLayerRunnable dlr = new DisableLayerRunnable(v);
             mPostedRunnables.add(dlr);
-            ViewCompat.postOnAnimation(this, dlr);
+            View.postOnAnimation(this, dlr);
         }
     }
 
@@ -1251,7 +1251,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
 
         if (mDragHelper.smoothSlideViewTo(mSlideableView, x, mSlideableView.getTop())) {
             setAllChildrenVisible();
-            ViewCompat.postInvalidateOnAnimation(this);
+            View.postInvalidateOnAnimation(this);
             return true;
         }
         return false;
@@ -1265,7 +1265,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
                 return;
             }
 
-            ViewCompat.postInvalidateOnAnimation(this);
+            View.postInvalidateOnAnimation(this);
         }
     }
 
@@ -1424,7 +1424,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
             }
         }
 
-        return checkV && ViewCompat.canScrollHorizontally(v, (isLayoutRtlSupport() ? dx : -dx));
+        return checkV && View.canScrollHorizontally(v, (isLayoutRtlSupport() ? dx : -dx));
     }
 
     boolean isDimmed(View child) {
@@ -1701,7 +1701,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
     static class SlidingPanelLayoutImplBase implements SlidingPanelLayoutImpl {
         @Override
         public void invalidateChildRegion(BGASwipeBackLayout2 parent, View child) {
-            ViewCompat.postInvalidateOnAnimation(parent, child.getLeft(), child.getTop(),
+            View.postInvalidateOnAnimation(parent, child.getLeft(), child.getTop(),
                     child.getRight(), child.getBottom());
         }
     }
@@ -1753,7 +1753,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
     static class SlidingPanelLayoutImplJBMR1 extends SlidingPanelLayoutImplBase {
         @Override
         public void invalidateChildRegion(BGASwipeBackLayout2 parent, View child) {
-            ViewCompat.setLayerPaint(child, ((LayoutParams) child.getLayoutParams()).dimPaint);
+            View.setLayerPaint(child, ((LayoutParams) child.getLayoutParams()).dimPaint);
         }
     }
 
@@ -1770,7 +1770,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
             info.setClassName(BGASwipeBackLayout.class.getName());
             info.setSource(host);
 
-            final ViewParent parent = ViewCompat.getParentForAccessibility(host);
+            final ViewParent parent = View.getParentForAccessibility(host);
             if (parent instanceof View) {
                 info.setParent((View) parent);
             }
@@ -1782,8 +1782,8 @@ public class BGASwipeBackLayout2 extends ViewGroup {
                 final View child = getChildAt(i);
                 if (!filter(child) && (child.getVisibility() == View.VISIBLE)) {
                     // Force importance to "yes" since we can't read the value.
-                    ViewCompat.setImportantForAccessibility(
-                            child, ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_YES);
+                    View.setImportantForAccessibility(
+                            child, View.IMPORTANT_FOR_ACCESSIBILITY_YES);
                     info.addChild(child);
                 }
             }
@@ -1853,7 +1853,7 @@ public class BGASwipeBackLayout2 extends ViewGroup {
         @Override
         public void run() {
             if (mChildView.getParent() == this) {
-                ViewCompat.setLayerType(mChildView, View.LAYER_TYPE_NONE, null);
+                View.setLayerType(mChildView, View.LAYER_TYPE_NONE, null);
                 invalidateChildRegion(mChildView);
             }
             mPostedRunnables.remove(this);
@@ -1861,6 +1861,6 @@ public class BGASwipeBackLayout2 extends ViewGroup {
     }
 
     boolean isLayoutRtlSupport() {
-        return ViewCompat.getLayoutDirection(this) == ViewCompat.LAYOUT_DIRECTION_RTL;
+        return View.getLayoutDirection(this) == View.LAYOUT_DIRECTION_RTL;
     }
 }
